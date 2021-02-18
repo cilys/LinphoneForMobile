@@ -184,9 +184,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:singleLine="true"
-                    android:layout_marginTop="@dimen/y10"
                     android:text="1001"
                     android:textColor="#FFF"
+                    android:layout_marginBottom="@dimen/y5"
                     android:textSize="@dimen/x50"
                     android:ellipsize="marquee" />
 
@@ -196,6 +196,7 @@
                     android:layout_height="wrap_content"
                     android:text="Service Center"
                     android:textAllCaps="false"
+                    android:layout_marginTop="@dimen/y5"
                     android:textSize="@dimen/x40"
                     android:textColor="#80FFFFFF" />
             </LinearLayout>

@@ -6,7 +6,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.cilys.linphoneformobile.BuildConfig;
 import com.cilys.linphoneformobile.R;
 import com.cilys.linphoneformobile.base.BaseLinphoneAc;
 import com.cilys.linphoneformobile.event.Event;

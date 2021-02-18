@@ -133,31 +133,42 @@ public class CallNumberAc extends BaseLinphoneAc {
             public void onSingleClick(View v) {
                 String phone = tv_show_number.getText().toString().trim();
 
-                if (phone == null || phone.length() < 1) {
-                    showToast("请输入号码");
-                    return;
-                }
+                toCall(phone);
+            }
+        });
 
-                if (getLinphoneConfig() == null) {
-                    showToast("请配置账户信息");
-                    startActivity(new Intent(CallNumberAc.this, AccountAc.class));
-
-                    return;
-                }
-
-                Intent i = new Intent(CallNumberAc.this, PhoneAc.class);
-                i.putExtra(INTENT_CALL_NUMBER, phone);
-                i.putExtra("FROM_TYPE", PhoneAc.FROM_TYPE_CALL_NUMBER);
-
-                i.putExtra("SHOW_TYPE", PhoneAc.SHOW_TYPE_OUT);
-                startActivity(i);
+        findView(R.id.service_center_button).setOnClickListener(new SingleClickListener() {
+            @Override
+            public void onSingleClick(View v) {
+                setTextToView(tv_show_number, "0");
+                toCall("0");
             }
         });
 
 
-
         setBackgroundById(R.id.root, R.mipmap.ic_call_bg);
         setBackgroundById(R.id.ll_number_dialog, R.mipmap.ic_call_dialog_bg);
+    }
+
+    private void toCall(String phone) {
+        if (phone == null || phone.length() < 1) {
+            showToast("请输入号码");
+            return;
+        }
+
+        if (getLinphoneConfig() == null) {
+            showToast("请配置账户信息");
+            startActivity(new Intent(CallNumberAc.this, AccountAc.class));
+
+            return;
+        }
+
+        Intent i = new Intent(CallNumberAc.this, PhoneAc.class);
+        i.putExtra(INTENT_CALL_NUMBER, phone);
+        i.putExtra("FROM_TYPE", PhoneAc.FROM_TYPE_CALL_NUMBER);
+
+        i.putExtra("SHOW_TYPE", PhoneAc.SHOW_TYPE_OUT);
+        startActivity(i);
     }
 
     @Override

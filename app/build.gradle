@@ -5,19 +5,19 @@ android {
     buildToolsVersion "30.0.0"
 
     signingConfigs {
-        release {
-            storeFile file("E:/jks/cily.jks")
-            storePassword "CF12cf"
-            keyAlias "cily"
-            keyPassword "CF12cf"
-        }
-
-        debug {
-            storeFile file("E:/jks/cily.jks")
-            storePassword "CF12cf"
-            keyAlias "cily"
-            keyPassword "CF12cf"
-        }
+//        release {
+//            storeFile file("E:/jks/cily.jks")
+//            storePassword "CF12cf"
+//            keyAlias "cily"
+//            keyPassword "CF12cf"
+//        }
+//
+//        debug {
+//            storeFile file("E:/jks/cily.jks")
+//            storePassword "CF12cf"
+//            keyAlias "cily"
+//            keyPassword "CF12cf"
+//        }
     }
 
     defaultConfig {
@@ -33,13 +33,13 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 
-            signingConfig signingConfigs.debug
+//            signingConfig signingConfigs.debug
         }
 
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.debug
+//            signingConfig signingConfigs.debug
         }
     }
 }
