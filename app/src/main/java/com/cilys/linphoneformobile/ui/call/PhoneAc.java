@@ -76,6 +76,10 @@ public class PhoneAc extends BaseLinphoneAc {
     private LinearLayout call_speaker;
     private ImageView call_speaker_img;
     private TextView call_speaker_tv;
+
+    private LinearLayout ll_call_mute;
+    private ImageView call_mute_img;
+    private TextView call_mute_tv;
     private void initCallView(){
         TextView tv_call_room = findView(R.id.tv_call_room);
         setTextToView(tv_call_room, LinphoneUtils.getDisplayName(getCurrentCall()));
@@ -84,17 +88,17 @@ public class PhoneAc extends BaseLinphoneAc {
 
         TextView tv_call_custom_name = findView(R.id.tv_call_custom_name);
 
-
         tv_call_time = findView(R.id.tv_call_time);
 
-        LinearLayout ll_call_mute = findView(R.id.ll_call_mute);
+        ll_call_mute = findView(R.id.ll_call_mute);
         ll_call_mute.setOnClickListener(new SingleClickListener() {
             @Override
             public void onSingleClick(View v) {
-
+                toggleMute(showType);
             }
         });
-
+        call_mute_img = findView(R.id.call_mute_img);
+        call_mute_tv = findView(R.id.call_mute_tv);
 
 
         call_speaker = findView(R.id.call_speaker);
@@ -177,6 +181,9 @@ public class PhoneAc extends BaseLinphoneAc {
     private ImageView out_speaker_img;
     private TextView out_speaker_tv;
     private LinearLayout out_speaker;
+    private LinearLayout ll_out_mute;
+    private ImageView out_mute_img;
+    private TextView out_mute_tv;
     private void initOutView(boolean show) {
         tv_out_room = findView(R.id.tv_out_room);
 
@@ -185,13 +192,15 @@ public class PhoneAc extends BaseLinphoneAc {
         TextView tv_out_custom_name = findView(R.id.tv_out_custom_name);
 
 
-        LinearLayout ll_out_mute = findView(R.id.ll_out_mute);
+        ll_out_mute = findView(R.id.ll_out_mute);
         ll_out_mute.setOnClickListener(new SingleClickListener() {
             @Override
             public void onSingleClick(View v) {
-
+                toggleMute(showType);
             }
         });
+        out_mute_img = findView(R.id.out_mute_img);
+        out_mute_tv = findView(R.id.out_mute_tv);
 
         out_speaker_img = findView(R.id.out_speaker_img);
         out_speaker_tv = findView(R.id.out_speaker_tv);
@@ -229,6 +238,40 @@ public class PhoneAc extends BaseLinphoneAc {
 
 
             call(outNumber);
+        }
+    }
+
+    private void toggleMute(int showType){
+        if (getLinphoneCore() == null) {
+            return;
+        }
+        getLinphoneCore().enableMic(!getLinphoneCore().micEnabled());
+        changeActionMicBackgound(!getLinphoneCore().micEnabled(), showType);
+    }
+
+    private void changeActionMicBackgound(boolean selected, int show) {
+        if (show == SHOW_TYPE_INCOMING) {
+
+        } else if (show == SHOW_TYPE_CALL) {
+            if (selected) {
+                setBackgoundResource(ll_call_mute, R.drawable.shape_round_for_action_white_bg);
+                setTextColor(call_mute_tv, R.color.color_main_text_color);
+                setImageResource(call_mute_img, R.drawable.icon_mute_black);
+            } else {
+                setBackgoundResource(ll_call_mute, R.drawable.shape_round_for_action_trans_bg);
+                setTextColor(call_mute_tv, R.color.white);
+                setImageResource(call_mute_img, R.drawable.icon_mute_white);
+            }
+        } else {
+            if (selected) {
+                setBackgoundResource(ll_out_mute, R.drawable.shape_round_for_action_white_bg);
+                setTextColor(out_mute_tv, R.color.color_main_text_color);
+                setImageResource(out_mute_img, R.drawable.icon_mute_black);
+            } else {
+                setBackgoundResource(ll_out_mute, R.drawable.shape_round_for_action_trans_bg);
+                setTextColor(out_mute_tv, R.color.white);
+                setImageResource(out_mute_img, R.drawable.icon_mute_white);
+            }
         }
     }
 
@@ -313,6 +356,7 @@ public class PhoneAc extends BaseLinphoneAc {
                     showType = SHOW_TYPE_CALL;
                     timeCount = 0;
                     changeActionSpeakerBackgound(getSpeakerMode(), showType);
+                    changeActionMicBackgound(!getLinphoneCore().micEnabled(), showType);
                     showView(SHOW_TYPE_CALL);
                 } else if (bean.getCallState() == Call.State.End || bean.getCallState() == Call.State.Released) {
                     if (LinphoneService.getInstance() != null) {

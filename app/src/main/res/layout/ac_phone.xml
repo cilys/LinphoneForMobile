@@ -53,6 +53,7 @@
                 android:text="Service Center"
                 android:textAllCaps="false"
                 android:textColor="#80FFFFFF"
+                android:visibility="invisible"
                 android:textSize="@dimen/x40"
                 android:ellipsize="marquee" />
         </LinearLayout>
@@ -68,9 +69,11 @@
                 android:id="@+id/ll_out_mute"
                 style="@style/style_call_action_parent" >
                 <ImageView
+                    android:id="@+id/out_mute_img"
                     style="@style/style_call_action_img"
                     android:src="@drawable/selector_call_action_img_mute"/>
                 <TextView
+                    android:id="@+id/out_mute_tv"
                     style="@style/style_call_action_tv"
                     android:text="MUTE"/>
             </LinearLayout>
@@ -129,6 +132,7 @@
             android:text="Service Center"
             android:textAllCaps="false"
             android:textColor="#80FFFFFF"
+            android:visibility="invisible"
             android:textSize="@dimen/x40"
             android:ellipsize="marquee" />
 
@@ -186,7 +190,6 @@
                     android:singleLine="true"
                     android:text="1001"
                     android:textColor="#FFF"
-                    android:layout_marginBottom="@dimen/y5"
                     android:textSize="@dimen/x50"
                     android:ellipsize="marquee" />
 
@@ -196,7 +199,8 @@
                     android:layout_height="wrap_content"
                     android:text="Service Center"
                     android:textAllCaps="false"
-                    android:layout_marginTop="@dimen/y5"
+                    android:visibility="gone"
+                    android:layout_marginTop="@dimen/y10"
                     android:textSize="@dimen/x40"
                     android:textColor="#80FFFFFF" />
             </LinearLayout>
@@ -223,9 +227,11 @@
                 android:id="@+id/ll_call_mute"
                 style="@style/style_call_action_parent" >
                 <ImageView
+                    android:id="@+id/call_mute_img"
                     style="@style/style_call_action_img"
                     android:src="@drawable/selector_call_action_img_mute"/>
                 <TextView
+                    android:id="@+id/call_mute_tv"
                     style="@style/style_call_action_tv"
                     android:text="MUTE"/>
             </LinearLayout>
